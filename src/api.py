@@ -4,6 +4,7 @@ import pandas as pd
 import numpy as np
 import os
 import datetime
+from flask import Flask, request, jsonify, render_template
 
 app = Flask(__name__)
 
@@ -187,3 +188,7 @@ if __name__ == '__main__':
     print("❤️  Health: http://localhost:5000/health")
     print("="*50 + "\n")
     app.run(debug=True, host='0.0.0.0', port=5000)
+
+@app.route('/panel', methods=['GET'])
+def panel():
+    return render_template('test_panel.html')
