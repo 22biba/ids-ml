@@ -180,15 +180,14 @@ def stats():
     })
 
 if __name__ == '__main__':
+    import os
     print("\n" + "="*50)
     print("🚀 SISTEMI IDS API PO STARTON...")
     print("="*50)
-    print("📡 URL: http://localhost:5000")
-    print("📊 Stats: http://localhost:5000/stats")
-    print("❤️  Health: http://localhost:5000/health")
+    port = int(os.environ.get('PORT', 5000))
+    print(f"📡 URL: http://localhost:{port}")
     print("="*50 + "\n")
-    app.run(debug=True, host='0.0.0.0', port=5000)
-
+    app.run(debug=False, host='0.0.0.0', port=port)
 @app.route('/panel', methods=['GET'])
 def panel():
     return render_template('test_panel.html')
