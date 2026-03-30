@@ -1,0 +1,79 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="PyPackageRequirementsInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredPackages">
+        <list>
+          <option value="amqp" />
+          <option value="asgiref" />
+          <option value="billiard" />
+          <option value="Cerberus" />
+          <option value="certifi" />
+          <option value="chardet" />
+          <option value="charset-normalizer" />
+          <option value="coreschema" />
+          <option value="coverage" />
+          <option value="dataclasses" />
+          <option value="decorator" />
+          <option value="Django" />
+          <option value="django-cors-headers" />
+          <option value="django-filter" />
+          <option value="django-multidb-router" />
+          <option value="django-redis" />
+          <option value="django-rest-swagger" />
+          <option value="djangorestframework" />
+          <option value="djangorestframework_simplejwt" />
+          <option value="dnspython" />
+          <option value="drf-yasg" />
+          <option value="et-xmlfile" />
+          <option value="eventlet" />
+          <option value="Faker" />
+          <option value="funcy" />
+          <option value="future" />
+          <option value="greenlet" />
+          <option value="idna" />
+          <option value="importlib-metadata" />
+          <option value="inflection" />
+          <option value="invoke" />
+          <option value="itypes" />
+          <option value="jdcal" />
+          <option value="Jinja2" />
+          <option value="joblib" />
+          <option value="kombu" />
+          <option value="MarkupSafe" />
+          <option value="model-bakery" />
+          <option value="monotonic" />
+          <option value="more-itertools" />
+          <option value="numpy" />
+          <option value="openapi-codec" />
+          <option value="openpyxl" />
+          <option value="packaging" />
+          <option value="pandas" />
+          <option value="pillow" />
+          <option value="psycopg2-binary" />
+          <option value="PyJWT" />
+          <option value="python-dateutil" />
+          <option value="python-decouple" />
+          <option value="pytz" />
+          <option value="PyYAML" />
+          <option value="redis" />
+          <option value="reportlab" />
+          <option value="requests" />
+          <option value="self" />
+          <option value="sentry-sdk" />
+          <option value="simplejson" />
+          <option value="six" />
+          <option value="sqlparse" />
+          <option value="text-unidecode" />
+          <option value="tzdata" />
+          <option value="uritemplate" />
+          <option value="urllib3" />
+          <option value="vine" />
+          <option value="xlrd" />
+          <option value="XlsxWriter" />
+          <option value="zipp" />
+        </list>
+      </option>
+    </inspection_tool>
+  </profile>
+</component>
