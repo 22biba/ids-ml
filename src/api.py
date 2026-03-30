@@ -190,4 +190,64 @@ if __name__ == '__main__':
     app.run(debug=False, host='0.0.0.0', port=port)
 @app.route('/panel', methods=['GET'])
 def panel():
-    return render_template('test_panel.html')
+    return '''<!DOCTYPE html>
+<html>
+<head>
+    <title>IDS System - Test Panel</title>
+    <style>
+        body { font-family: Arial; max-width: 800px; margin: 40px auto; background: #1a1a2e; color: #eee; padding: 20px; }
+        h1 { color: #00d4ff; text-align: center; }
+        button { background: #00d4ff; color: #000; padding: 12px 24px; border: none; border-radius: 6px; cursor: pointer; margin: 5px; font-size: 14px; font-weight: bold; }
+        button.red { background: #ff4444; color: white; }
+        pre { background: #0d0d1a; padding: 15px; border-radius: 8px; border-left: 4px solid #00d4ff; overflow-x: auto; }
+        .normal { background: #1a4a1a; color: #44ff44; padding: 10px; border-radius: 6px; text-align: center; font-size: 18px; font-weight: bold; margin: 10px 0; }
+        .attack { background: #4a1a1a; color: #ff4444; padding: 10px; border-radius: 6px; text-align: center; font-size: 18px; font-weight: bold; margin: 10px 0; }
+    </style>
+</head>
+<body>
+    <h1>🛡️ IDS System — Test Panel</h1>
+    <p style="text-align:center; color:#aaa;">Cloud API: ids-ml-6che.onrender.com</p>
+    <div style="text-align:center; margin: 20px 0;">
+        <button onclick="testHealth()">❤️ Health</button>
+        <button onclick="testStats()">📊 Statistika</button>
+        <button onclick="testNormal()">🟢 Test NORMAL</button>
+        <button class="red" onclick="testAttack()">🔴 Test SULM</button>
+        <button onclick="testHistory()">📜 Historia</button>
+    </div>
+    <div id="status"></div>
+    <pre id="output">Klikoni një buton për të testuar...</pre>
+    <script>
+        async function callAPI(url, method="GET", body=null) {
+            document.getElementById("output").textContent = "⏳ Duke pritur përgjigje...";
+            try {
+                const opts = { method, headers: {"Content-Type": "application/json"} };
+                if (body) opts.body = JSON.stringify(body);
+                const res = await fetch(url, opts);
+                const data = await res.json();
+                if (data.prediction) {
+                    const isAttack = data.prediction === "SULM";
+                    document.getElementById("status").innerHTML =
+                        "<div class='" + (isAttack ? "attack" : "normal") + "'>" +
+                        (isAttack ? "🔴 SULM I ZBULUAR!" : "🟢 TRAFIK NORMAL") +
+                        " — Besueshmëria: " + (data.confidence * 100).toFixed(1) + "%" +
+                        "</div>";
+                } else {
+                    document.getElementById("status").innerHTML = "";
+                }
+                document.getElementById("output").textContent = JSON.stringify(data, null, 2);
+            } catch(e) {
+                document.getElementById("output").textContent = "❌ Gabim: " + e.message;
+            }
+        }
+        const testHealth  = () => callAPI("/health");
+        const testStats   = () => callAPI("/stats");
+        const testHistory = () => callAPI("/history");
+        const testNormal  = () => callAPI("/predict", "POST", {
+            features: [80,100000,5,3,1500,800,1500,40,300,200,800,20,150,100,50000,10,5000,2000,10000,100,8000,2000,1500,6000,200,5000,1500,1200,4000,100,0,0,0,0,40,32,5,3,40,1500,300,200,40000,0,1,0,1,1,0,0,0,1,300,300,150,40,0,0,0,0,0,0,5,1500,3,800,65535,256,5,20,0,0,0,0,0,0,0,0]
+        });
+        const testAttack  = () => callAPI("/predict", "POST", {
+            features: [0,5,1000,0,44000,0,44,44,44,0,0,0,0,0,8800000,200000,5,0,5,5,5,5,0,5,5,0,0,0,0,0,0,0,0,0,20,0,200000,0,44,44,44,0,0,0,0,0,0,0,0,0,0,0,44,44,0,20,0,0,0,0,0,0,1000,44000,0,0,0,0,1000,20,0,0,0,0,0,0,0,0]
+        });
+    </script>
+</body>
+</html>'''
